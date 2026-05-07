@@ -5,7 +5,7 @@ End-to-end Python analytics: **weekly revenue forecasting** (Holt–Winters, SAR
 ## Quick start
 
 ```bash
-cd "Health care project"
+cd "FINANCIAL ANALYTICAL SYSTEM"
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -U pip

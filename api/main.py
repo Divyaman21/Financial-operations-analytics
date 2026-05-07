@@ -10,6 +10,16 @@ from pydantic import BaseModel, Field
 app = FastAPI(title="Financial Operations Analytics API", version="0.1.0")
 
 
+@app.get("/")
+def read_root() -> dict:
+    return {
+        "message": "Welcome to the Financial Operations Analytics API",
+        "documentation": "/docs",
+        "latest_metrics": "/artifacts/latest_metrics",
+        "health": "/health",
+    }
+
+
 class ScoreRequest(BaseModel):
     customer_id: int = Field(..., ge=1)
     recency_days: float = Field(..., ge=0)

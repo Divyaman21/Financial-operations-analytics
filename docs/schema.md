@@ -44,3 +44,4 @@ Grain, keys, and refresh assumptions for files under `artifacts/bi_export/` (als
 | `weekly_revenue_last` | Last in-sample weekly revenue (context KPI). |
 
 **Refresh logic:** rebuild from raw orders with a chosen `as_of_date`; never mix future orders into features.
+hold-winters model 
