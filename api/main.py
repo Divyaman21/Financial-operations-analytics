@@ -7,7 +7,10 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
-app = FastAPI(title="Financial Operations Analytics API", version="0.1.0")
+from api.routers import router as v1_router
+
+app = FastAPI(title="Financial Operations Analytics API", version="0.2.0")
+app.include_router(v1_router)
 
 
 @app.get("/")
@@ -17,6 +20,14 @@ def read_root() -> dict:
         "documentation": "/docs",
         "latest_metrics": "/artifacts/latest_metrics",
         "health": "/health",
+        "v1_endpoints": {
+            "churn_predict": "/api/v1/churn/predict",
+            "forecast": "/api/v1/forecast/26-weeks",
+            "drift": "/api/v1/drift/latest",
+            "alerts": "/api/v1/alerts/latest",
+            "models": "/api/v1/models",
+            "health": "/api/v1/health",
+        },
     }
 
 

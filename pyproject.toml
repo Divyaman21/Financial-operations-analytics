@@ -21,6 +21,7 @@ dependencies = [
   "lifelines>=0.27.0,<1",
   "prophet>=1.1.5,<2",
   "plotly>=5.18.0,<6",
+  "shap>=0.45.0,<1",
 ]
 
 [project.optional-dependencies]

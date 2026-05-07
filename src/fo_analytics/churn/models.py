@@ -249,7 +249,7 @@ def refit_best_and_score(
     best_name: str,
     best_params: dict[str, Any] | None,
     seed: int = RANDOM_SEED,
-) -> pd.DataFrame:
+) -> tuple[pd.DataFrame, Any]:
     """Refit on all rows for BI export scores (same features as training)."""
     df = customers.dropna(subset=FEATURE_COLS + ["churned"]).copy()
     X = df[FEATURE_COLS]
@@ -283,14 +283,14 @@ def refit_best_and_score(
         probs = clf.predict_proba(X)[:, 1]
 
     else:
-        hgb = HistGradientBoostingClassifier(
+        clf = HistGradientBoostingClassifier(
             max_depth=5,
             learning_rate=0.06,
             max_iter=200,
             random_state=seed,
         )
-        hgb.fit(X, y, sample_weight=w)
-        probs = hgb.predict_proba(X)[:, 1]
+        clf.fit(X, y, sample_weight=w)
+        probs = clf.predict_proba(X)[:, 1]
 
     out = pd.DataFrame({"customer_id": df["customer_id"].values, "churn_prob": probs})
-    return out
+    return out, clf
