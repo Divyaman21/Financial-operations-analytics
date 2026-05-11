@@ -101,7 +101,7 @@ async def forecast_revenue(scenario: str = "base") -> dict:
     """
     import json
 
-    metrics_path = Path(__file__).resolve().parents[2] / "artifacts" / "metrics" / "forecast_comparison.json"
+    metrics_path = Path(__file__).resolve().parents[1] / "artifacts" / "metrics" / "forecast_comparison.json"
     if not metrics_path.exists():
         raise HTTPException(status_code=404, detail="Run the pipeline first to generate forecasts")
 
@@ -130,8 +130,8 @@ async def forecast_revenue(scenario: str = "base") -> dict:
 @router.get("/health")
 async def health_check() -> dict:
     """Check API and model health."""
-    models_dir = Path(__file__).resolve().parents[2] / "artifacts" / "models"
-    manifest = Path(__file__).resolve().parents[2] / "artifacts" / "model_manifest.json"
+    models_dir = Path(__file__).resolve().parents[1] / "artifacts" / "models"
+    manifest = Path(__file__).resolve().parents[1] / "artifacts" / "model_manifest.json"
 
     model_count = len(list(models_dir.glob("*.pkl"))) if models_dir.exists() else 0
     has_manifest = manifest.exists()
@@ -149,7 +149,7 @@ async def latest_drift() -> dict:
     """Return the latest drift report data."""
     import json
 
-    drift_path = Path(__file__).resolve().parents[2] / "artifacts" / "monitoring" / "baseline.json"
+    drift_path = Path(__file__).resolve().parents[1] / "artifacts" / "monitoring" / "baseline.json"
     if not drift_path.exists():
         raise HTTPException(status_code=404, detail="No drift baseline found. Run pipeline first.")
 
@@ -161,7 +161,7 @@ async def latest_alerts() -> dict:
     """Return the latest alerts."""
     import json
 
-    alerts_path = Path(__file__).resolve().parents[2] / "artifacts" / "alerts.json"
+    alerts_path = Path(__file__).resolve().parents[1] / "artifacts" / "alerts.json"
     if not alerts_path.exists():
         return {"alerts": [], "message": "No alerts generated yet"}
 
@@ -174,7 +174,7 @@ async def list_models() -> dict:
     """List all registered models and their versions."""
     import json
 
-    manifest_path = Path(__file__).resolve().parents[2] / "artifacts" / "model_manifest.json"
+    manifest_path = Path(__file__).resolve().parents[1] / "artifacts" / "model_manifest.json"
     if not manifest_path.exists():
         return {"models": {}, "message": "No models registered yet"}
 

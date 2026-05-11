@@ -48,7 +48,7 @@ xdg-open artifacts/dashboard/index.html  # Linux
 
 ## 6. Start the API (Optional)
 ```bash
-.venv/bin/uvicorn api.main:app --reload
+uvicorn api.main:app --reload
 ```
 Visit **http://localhost:8000/docs** for interactive API documentation.
 
